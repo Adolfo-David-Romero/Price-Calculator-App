@@ -5,6 +5,7 @@ namespace Price_Calculator_App.BusinessLogic;
 public class Bill
 {
     //Feilds
+    private string _userName;
     private double _pricePerItem;
     private bool _addDiscount;
     private double _discountAmount;
@@ -17,8 +18,9 @@ public class Bill
     //Constructors 
     Bill() { }
 
-    Bill(double pricePerItem, bool addDiscount, double discountAmount, int numberOfItems)
+    Bill(string userName, double pricePerItem, bool addDiscount, double discountAmount, int numberOfItems)
     {
+        this._userName = userName;
         this._pricePerItem = pricePerItem;
         this._addDiscount = addDiscount;
         this._discountAmount = discountAmount;
@@ -27,6 +29,11 @@ public class Bill
     
 
     //Properties
+    public string UserName
+    {
+        get { return _userName; }
+        set { _userName = value; }
+    }
     public double PricePerItem {
         get {return _pricePerItem;}
         set{
@@ -81,10 +88,7 @@ public class Bill
     }
     
     //Functions
-    override public string ToString()
-    {
-        return $"Current Bill: {NumberOfItems} item(s) purchased\n ${PricePerItem} per item\n ";
-    }
+    override public string ToString() { return $"{UserName}, Your Total is: ${Total}"; }
     
     
     

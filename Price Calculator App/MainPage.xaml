@@ -7,6 +7,15 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
+            
+            <Entry x:Name="nameEntry" Placeholder="Enter Name"/>
+            <Entry x:Name="priceEntry" Placeholder="Price"/>
+            <HorizontalStackLayout>
+                <Picker x:Name="discountEntry" Title="Enter Discount %"/>
+                <RadioButton x:Name="discountRbtn" Content="Add Discount"/>
+            </HorizontalStackLayout>
+            
+            
             <Image
                 Source="dotnet_bot.png"
                 HeightRequest="185"
@@ -24,19 +33,27 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
-            <Button
+            <!--<Button
                 x:Name="CounterBtn"
                 Text="Click me" 
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" />-->
                 
             <Button
                 x:Name="DiscountBtn"
                 Text="Discount" 
                 SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                Clicked="OnDiscountBtnClicked"
                 HorizontalOptions="Fill" />
+            
+            <Label
+                x:Name="DiscountTxt"
+                Text=""
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+            
         </VerticalStackLayout>
     </ScrollView>
 

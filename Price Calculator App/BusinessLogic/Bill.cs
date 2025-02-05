@@ -4,17 +4,17 @@ namespace Price_Calculator_App.BusinessLogic;
 
 public class Bill
 {
-    //Fields
+    // Fields
     private string _userName;
     private double _pricePerItem;
     private bool _addDiscount;
     private double _discountAmount;
     private int _numberOfItems;
-    
-    //Constants
+
+    // Constants
     private const double taxRate = 0.13;
 
-    //Constructors 
+    // Constructors
     public Bill() { }
 
     public Bill(string userName, double pricePerItem, bool addDiscount, double discountAmount, int numberOfItems)
@@ -25,22 +25,25 @@ public class Bill
         this._discountAmount = discountAmount;
         this._numberOfItems = numberOfItems;
     }
-    
 
-    //Properties
+    // Properties
     public string UserName
     {
         get { return _userName; }
         set { _userName = value; }
     }
-    public double PricePerItem {
-        get {return _pricePerItem;}
-        set{
+
+    public double PricePerItem
+    {
+        get { return _pricePerItem; }
+        set
+        {
             if (value > 0)
             {
                 _pricePerItem = value;
             }
-            else { Console.WriteLine("Invalid: Price must be greater than zero"); }
+            else{ Console.WriteLine("Invalid: Price must be greater than zero");}
+               
         }
     }
 
@@ -50,44 +53,58 @@ public class Bill
         set { _addDiscount = value; }
     }
 
-    public double DiscountAmount {
+    public double DiscountAmount
+    {
         get
         {
-            if (_addDiscount) // if there is a discount added
-            {
-                return _discountAmount;
-            }else { return 0.00; } //else, return 0
+            return _addDiscount ? _discountAmount : 0.00;
         }
         set
         {
-            if (value > 0 && value <= 1) //Discount can only be between 0 and 100%
+            if (value >= 0 && value <= 1)
             {
+                // Ensure it's between 0 and 100%
                 _discountAmount = value;
-            }else { Console.WriteLine("Invalid: Discount must be greater than 0 AND less than 100"); }
-            
+            }
+            else{Console.WriteLine("Invalid: Discount must be between 0 and 1 (0-100%)");}
+                
         }
     }
 
     public int NumberOfItems
     {
-        get {return _numberOfItems;}
-        set{
+        get { return _numberOfItems; }
+        set
+        {
             if (value > 0)
             {
                 _numberOfItems = value;
             }
-            else { Console.WriteLine("Invalid: Number of items must be greater than zero"); }
+            else{Console.WriteLine("Invalid: Number of items must be greater than zero");}
         }
     }
+    
     public double Total
     {
-        /*TotalPrice (pricePerItem + Tax @13% ‐discount)* numberofItems*/
-        get { return (PricePerItem + taxRate - DiscountAmount)* NumberOfItems; }
-        
+        get
+        {
+            double priceWithTax = PricePerItem * (1 + taxRate); // Apply 13% tax
+            double discountedPrice = priceWithTax; // Default price
+
+            if (_addDiscount)
+            {
+                discountedPrice -= (DiscountAmount * PricePerItem); // Apply discount
+            }
+
+            return discountedPrice * NumberOfItems;
+        }
     }
-    
-    //Functions
-    override public string ToString() { return $"{UserName}, Your Total is: ${Total}"; }
+
+    // Functions
+    public override string ToString()
+    {
+        return $"{UserName}, Your Total is: ${Total}";
+    }
 
     public void ClearData()
     {
@@ -96,12 +113,6 @@ public class Bill
         DiscountAmount = 0.00;
         AddDiscount = false;
         NumberOfItems = 0;
-        
-        
     }
-    
-    
-    
-
     
 }

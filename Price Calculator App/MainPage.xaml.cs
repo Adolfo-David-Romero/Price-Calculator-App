@@ -1,8 +1,12 @@
-﻿namespace Price_Calculator_App;
+﻿using System;
+using Microsoft.Maui.Accessibility;
+using Microsoft.Maui.Controls;
+using Price_Calculator_App.BusinessLogic;
+
+namespace Price_Calculator_App;
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
     
 
     public MainPage()
@@ -21,18 +25,26 @@ public partial class MainPage : ContentPage
 
         SemanticScreenReader.Announce(CounterBtn.Text);
     }*/
+    //Discount Button 
     private void OnDiscountBtnClicked(object sender, EventArgs e)
     {
-            
-        DiscountTxt.Text = $"";
+        string userName = nameEntry.Text;
+        int pricePerItem = int.Parse(priceEntry.Text);
+        bool addDiscount = discountRbtn.IsChecked;
+        double discountAmount = double.Parse(discountEntry.ToString());
+        int numberOfItem = int.Parse(itemsEntry.Text);
+        
+        Bill bill = new Bill(userName, pricePerItem, addDiscount, discountAmount, numberOfItem);
+        
+        DiscountLabel.Text = $"{bill.ToString()}";
 
-        SemanticScreenReader.Announce(DiscountTxt.Text);
+        SemanticScreenReader.Announce(DiscountLabel.Text);
     }
-    private void OnDiscountClicked(object sender, EventArgs e)
+    //Clear Button
+    private void OnClearBtnClicked(object sender, EventArgs e)
     {
-            
-            DiscountTxt.Text = $"";
-
-        SemanticScreenReader.Announce(DiscountTxt.Text);
+        
+        SemanticScreenReader.Announce(DiscountLabel.Text);
     }
+    
 }

@@ -11,10 +11,19 @@
             <Entry x:Name="nameEntry" Placeholder="Enter Name"/>
             <Entry x:Name="priceEntry" Placeholder="Price"/>
             <HorizontalStackLayout>
-                <Picker x:Name="discountEntry" Title="Enter Discount %"/>
+                <Picker x:Name="discountEntry" Title="Enter Discount %">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:Double}">
+                            <x:Double>0.1</x:Double>
+                            <x:Double>0.15</x:Double>
+                            <x:Double>0.25</x:Double>
+                            <x:Double>0.5</x:Double>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
                 <RadioButton x:Name="discountRbtn" Content="Add Discount"/>
             </HorizontalStackLayout>
-            
+            <Entry x:Name="itemsEntry" Placeholder="Number of Items"/>
             
             <Image
                 Source="dotnet_bot.png"
@@ -43,16 +52,19 @@
             <Button
                 x:Name="DiscountBtn"
                 Text="Discount" 
-                SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnDiscountBtnClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="ClearBtn"
+                Text="Clear" 
+                Clicked="OnClearBtnClicked"
                 HorizontalOptions="Fill" />
             
             <Label
-                x:Name="DiscountTxt"
+                x:Name="DiscountLabel"
                 Text=""
                 Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                SemanticProperties.HeadingLevel="Level2"/>
             
         </VerticalStackLayout>
     </ScrollView>

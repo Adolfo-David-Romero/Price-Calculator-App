@@ -4,21 +4,20 @@ namespace Price_Calculator_App.BusinessLogic;
 
 public class Bill
 {
-    //Feilds
+    //Fields
     private string _userName;
     private double _pricePerItem;
     private bool _addDiscount;
     private double _discountAmount;
     private int _numberOfItems;
-
     
     //Constants
     private const double taxRate = 0.13;
 
     //Constructors 
-    Bill() { }
+    public Bill() { }
 
-    Bill(string userName, double pricePerItem, bool addDiscount, double discountAmount, int numberOfItems)
+    public Bill(string userName, double pricePerItem, bool addDiscount, double discountAmount, int numberOfItems)
     {
         this._userName = userName;
         this._pricePerItem = pricePerItem;
@@ -82,13 +81,24 @@ public class Bill
     }
     public double Total
     {
-        //Accessor property (read-only)
         /*TotalPrice (pricePerItem + Tax @13% ‐discount)* numberofItems*/
         get { return (PricePerItem + taxRate - DiscountAmount)* NumberOfItems; }
+        
     }
     
     //Functions
     override public string ToString() { return $"{UserName}, Your Total is: ${Total}"; }
+
+    public void ClearData()
+    {
+        UserName = string.Empty;
+        PricePerItem = 0;
+        DiscountAmount = 0.00;
+        AddDiscount = false;
+        NumberOfItems = 0;
+        
+        
+    }
     
     
     
